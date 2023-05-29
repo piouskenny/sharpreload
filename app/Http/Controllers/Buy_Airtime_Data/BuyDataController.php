@@ -7,6 +7,9 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Http\Requests\BuyDataRequest;
 
+use GuzzleHttp\Client;
+
+
 class BuyDataController extends Controller
 {
     public function buy_mtn_data()
@@ -19,16 +22,33 @@ class BuyDataController extends Controller
 
     public function buy_mtn_data_request(BuyDataRequest $request)
     {
-        // dd($request->all());
 
         $request->validated();
 
         $user = User::where('id', '=', session('User'))->first();
 
-        if ($user->pin != $request->pin) {
+        $doubleValue = floatval($request->amount_input);
+        $user_balance = $user->userAccount->account_balance;
+
+        if ($doubleValue > $user_balance) {
+
+            return back()->with('failed', "Balance too low");
+        } elseif ($user->pin != $request->pin) {
+
             return back()->with('failed', 'Incorrect Pin');
         } else {
-            return back()->with('success', "Data Purchased successfully $request->data_plans for $request->phone_number");
+            // Remove the amount bought from the balance
+            $new_balance =  $user_balance - $doubleValue;
+
+            $update_user_account =  $user->userAccount->update(
+                [
+                    'account_balance' => $new_balance,
+                ]
+            );
+
+            if ($update_user_account) {
+                return back()->with('success', "Data Purchased successfully $request->data_plans for $request->phone_number");
+            }
         }
     }
 

@@ -28,7 +28,7 @@
                             </p>
                         </div>
                         <div class="items-center px-4 py-3 z-50">
-                            <a href="{{ route('user.buy_mtn_data') }}">
+                            <a href="{{ route('user.dashboard') }}">
                                 <button id="ok-btn"
                                     class="px-4 py-2 bg-green-500 text-white text-base font-medium rounded-md w-full shadow-sm hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-300">
                                     OK
@@ -70,17 +70,16 @@
 
 
         <h1 class="text-center font-bold my-4 text-xl text-green-500">BUY MTN DATA</h1>
-        <div class=" h-screen w-screen" class="mb-4">
-
+        <div class="h-screen w-screen" class="mb-4">
             <div class="flex justify-center w-screen">
-                <div class="w-full ">
+                <div class="w-full">
                     <form action="{{ route('user.buy_mtn_data_request') }}" method="post">
                         @csrf
                         @method('post')
 
                         <div class="flex justify-center">
                             <input type="number" name="phone_number"
-                                class="border-2 px-2 md:h-12 mt-4 rounded-lg md:w-[300px] w-[80%]  h-[8vh] input_focus"
+                                class="border-2 px-2 md:h-12 mt-4 rounded-lg md:w-[300px] w-[80%] h-[8vh] input_focus"
                                 min="0" placeholder="Phone Number">
                         </div>
                         <span class="block text-red-500 text-center">
@@ -89,23 +88,16 @@
                             @enderror
                         </span>
 
-
-
-
                         <div class="flex justify-center">
-                            <select name="data_plans" id=""
-                                class="border-2 px-2 md:h-12 mt-4 rounded-lg md:w-[300px] w-[80%]  h-[8vh] input_focus text-gray-800">
+                            <select name="data_plans" id="data_plans"
+                                class="border-2 px-2 md:h-12 mt-4 rounded-lg md:w-[300px] w-[80%] h-[8vh] input_focus text-gray-800">
                                 <option value="">Select Plan</option>
-                                <option value="mtn 1GB">MTN 1GB #240</option>
-                                <option value="mtn 2GB">MTN 2GB #300</option>
-                                <option value="mtn 3GB">MTN 3GB #500</option>
-                                <option value="mtn 4GB">MTN 4GB #600</option>
-                                <option value="mtn">MTN 5GB #800</option>
-                                <option value="mtn">MTN 6GB #900</option>
-                                <option value="mtn">MTN 6GB #1200</option>
-                                <option value="mtn">MTN 7GB #1400</option>
-                                <option value="mtn">MTN 8GB #1800</option>
-
+                                <option value="mtn 500MB #125">MTN SME 500MB #125</option>
+                                <option value="mtn 1GB #240">MTN SME 1GB #240</option>
+                                <option value="mtn 2GB #480">MTN SME 2GB #480</option>
+                                <option value="mtn 3GB #720">MTN SME 3GB #720</option>
+                                <option value="mtn 5GB #1200">MTN SME 5GB #1200</option>
+                                <option value="mtn 6GB #2400">MTN SME 10GB #2400</option>
                             </select>
                         </div>
                         <span class="block text-red-500 text-center">
@@ -114,14 +106,18 @@
                             @enderror
                         </span>
 
-
+                        <div class="flex justify-center">
+                            <input type="text" name="amount_input" id="amount_input" value=""
+                                class="border-2 px-2 md:h-12 mt-4 rounded-lg md:w-[300px] w-[80%] h-[8vh] input_focus disabled"
+                                min="0" placeholder="Amount">
+                        </div>
 
                         <div class="flex justify-center">
                             <input type="text" name="coupon"
-                                class="border-2 px-2 md:h-12 mt-4 rounded-lg md:w-[300px] w-[80%]  h-[8vh] input_focus"
+                                class="border-2 px-2 md:h-12 mt-4 rounded-lg md:w-[300px] w-[80%] h-[8vh] input_focus"
                                 min="0" placeholder="Coupon Code (Optional)">
                         </div>
-                        <p class="block px-10 text-gray-500 mt-2">Leave Blank if you don't have a coupon</p>
+                        <p class="block px-10 text-gray-500 mt-2 text-center">Leave Blank if you don't have a coupon</p>
                         <span class="block text-red-500 text-center">
                             @error('coupon')
                                 {{ $message }}
@@ -130,7 +126,7 @@
 
                         <div class="flex justify-center">
                             <input type="password" name="pin"
-                                class="border-2 px-2 md:h-12 mt-4 rounded-lg md:w-[300px] w-[80%]  h-[8vh] input_focus"
+                                class="border-2 px-2 md:h-12 mt-4 rounded-lg md:w-[300px] w-[80%] h-[8vh] input_focus"
                                 min="0" placeholder="Pin">
                         </div>
                         <span class="block text-red-500 text-center">
@@ -139,19 +135,30 @@
                             @enderror
                         </span>
 
-
                         <div class="my-4 flex justify-center">
                             <button type="submit"
-                                class="opacity-80  md:w-[23%] w-[80%] border-2 h-[8vh] text-white bg-green-400 py-1 rounded-md px-5 ">
+                                class="opacity-80md:w-[23%] w-[80%] border-2 h-[8vh] text-white md:w-[22%] bg-green-400 py-1 rounded-md px-5 ">
                                 Purchase
                             </button>
                         </div>
                     </form>
                 </div>
             </div>
-
-
         </div>
+
+        <script>
+            const dataPlansSelect = document.getElementById('data_plans');
+            const amountInput = document.getElementById('amount_input');
+            amountInput.setAttribute('readonly', 'readonly');
+
+            dataPlansSelect.addEventListener('change', function() {
+                const selectedOption = dataPlansSelect.options[dataPlansSelect.selectedIndex];
+                const optionValue = selectedOption.value;
+                const selectedAmount = optionValue.split('#')[1].trim();
+                amountInput.value = selectedAmount;
+            });
+        </script>
+
     </div>
 
 

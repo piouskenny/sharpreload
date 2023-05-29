@@ -24,6 +24,7 @@ class BuyDataRequest extends FormRequest
         return [
             'phone_number' => 'required|numeric|digits:11',
             'data_plans' => 'required|string',
+            'amount_input' => 'required|numeric',
             'coupon' => 'string|nullable',
             'pin' => 'required|integer',
         ];

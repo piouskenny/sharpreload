@@ -33,13 +33,12 @@
         </div>
     @endif
 
-
     <div id="app" class="flex items-center justify-center h-screen">
         <div class="bg-white p-8 rounded shadow">
-            <h1 class="text-red-700 bg-red-200 text-center px-2  py-8 text-center mx-10">
+            <h1 class="text-red-700 bg-red-200 text-center px-2  py-8 mx-10">
                 You don't have a transaction pin Yet,
-                <span class="block">
-                    so you can perform any transaction
+                <span class="block text-red-800">
+                    You can't perform any Transaction unless you have one
                 </span>
             </h1>
 

@@ -51,6 +51,7 @@ class UserController extends Controller
             'user_id' => $user->id,
             'account_balance' => 0,
         ]);
+        
 
 
         return redirect()->route('user.login')->with('success', 'Account created Successfully');
