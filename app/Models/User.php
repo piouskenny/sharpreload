@@ -32,4 +32,9 @@ class User extends Model
     {
         return $this->hasMany(TransactionHistory::class);
     }
+
+    public function UtilitiesTransactions()
+    {
+        return $this->hasMany(UtilitiesTransactions::class);
+    }
 }

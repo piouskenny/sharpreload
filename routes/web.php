@@ -31,6 +31,7 @@ Route::prefix('/user')->group(
         // User Account Route
 
         Route::get('/deposit', [UserAccountController::class, 'deposit'])->name('user.deposit')->middleware('user_auth');
+        Route::get('/UtilitiesTransactions', [UserAccountController::class, 'UtilitiesTransactions'])->name('user.UtilitiesTransactions')->middleware('user_auth');
 
 
         // UserAccountPost request

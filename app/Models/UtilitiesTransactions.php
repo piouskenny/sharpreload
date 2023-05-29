@@ -8,4 +8,18 @@ use Illuminate\Database\Eloquent\Model;
 class UtilitiesTransactions extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'user_id',
+        'phone_number',
+        'plan',
+        'amount',
+        'coupon',
+        'status,'
+    ];
+
+    public function user()
+    {
+        return  $this->belongsTo(User::class);
+    }
 }

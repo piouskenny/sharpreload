@@ -1,7 +1,7 @@
 <section class="md:px-60 mt-10 px-4">
     <div class="md:grid grid-cols-3 md:space-x-4">
 
-        <a href="" class="col-span-1 ">
+        <a href={{ route('user.UtilitiesTransactions') }} class="col-span-1 ">
             <div class=" shadow-md flex items-center space-x-10 py-4 rounded-md  px-2 bg-white">
                 <div id="image" class="bg-green-400 rounded-md p-2">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"

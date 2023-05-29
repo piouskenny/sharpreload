@@ -13,6 +13,13 @@ return new class extends Migration
     {
         Schema::create('utilities_transactions', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('user_id');
+            $table->bigInteger('phone_number');
+            $table->string('plan');
+            $table->integer('amount');
+            $table->string('coupon')->nullable();
+            $table->string('status');
+            $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();
         });
     }

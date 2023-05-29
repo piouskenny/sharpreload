@@ -10,9 +10,28 @@
         <div class=" h-screen" class="mb-4">
             <h1 class="text-center font-bold my-4 text-xl text-green-500">DEPOSIT</h1>
 
-            <div class="text-center mt-2">
-                <h1>Balance ₦{{ $userAccount->account_balance }}
-                </h1>
+            <div class="text-center mt-2 ">
+                <div class="grid grid-cols-3 justify-between px-10 pb-10 space-x-1">
+                    <div class="col-span-1 shadow-lg rounded-md text-sm md:text-md bg-white p-2 flex-shrink-0">
+                        <span class="block text-gray-600">
+                            Balance
+                        </span>
+                        ₦{{ $userAccount->account_balance }}
+                    </div>
+                    <div class="col-span-1 shadow-lg rounded-md text-sm md:text-md bg-white p-2 flex-shrink-0">
+                        <span class="block text-gray-600">
+                            All Total
+                        </span>
+                        ₦{{ $all_transaction_total }}
+                    </div>
+                    <div class="col-span-1 shadow-lg rounded-md text-sm md:text-md bg-white p-2 flex-shrink-0">
+                        <span class="block text-gray-600">
+                            This Month
+                        </span>
+                        ₦{{ $all_transaction_this_month }}
+                    </div>
+                </div>
+
 
                 <h1>Transfer to your virtual Accounts</h1>
 
@@ -189,18 +208,18 @@
                 {{-- DATA, AIRTIME AND BILLS PAYMENT TRANSCATION HISTORY --}}
                 @forelse ($TransactionHistories as $transactionHistory)
                     <div
-                        class="flex justify-between md:space-x-10 text-sm my-2 md:text-md  shadow-md rounded-md py-4 px-4 overflow-y-auto">
+                        class="flex justify-between md:space-x-10 text-sm my-2 md:text-md  shadow-md rounded-md py-4 px-4 overflow-y-auto bg-white">
                         <div>
                             <p class="font-semibold">₦{{ $transactionHistory->amount }} </p>
                             <p>{{ $transactionHistory->payment_method }} </p>
                             <div class="mt-2 md:hidden">
                                 <p>{{ $transactionHistory->transaction_type }} </p>
-                                <p><span class="font-semibold">Date:</span> {{ $transactionHistory->created_at }}</p>
+                                <p><span class="font-semibold">Date:</span> {{ $transactionHistory->created_at->format('M, d, Y H:i:s') }}</p>
                             </div>
                         </div>
                         <div class="hidden md:block">
                             <p>{{ $transactionHistory->transaction_type }} </p>
-                            <p><span class="font-semibold">Date:</span> {{ $transactionHistory->created_at }}</p>
+                            <p><span class="font-semibold">Date:</span> {{ $transactionHistory->created_at->format('M, d, Y H:i:s') }}</p>
                         </div>
 
                         <p

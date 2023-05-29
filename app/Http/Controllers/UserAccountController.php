@@ -37,11 +37,39 @@ class UserAccountController extends Controller
         return redirect()->route('user.pin_page')->with('success', 'Transaction Pin created Successfully');
     }
 
+
+
+    public function UtilitiesTransactions()
+    {
+        $user = User::where('id', '=', session('User'))->first();
+
+        $utilities_transactions =  $user->UtilitiesTransactions()->orderBy('id', 'desc')->paginate(5);
+
+        return view(
+            'User.utilitiesTransactions',
+            [
+                'user' => $user,
+                'utilities_transactions' => $utilities_transactions
+            ]
+        );
+    }
+
+
     public function deposit()
     {
         $user = User::where('id', '=', session('User'))->first();
         $useraccount = UserAccount::where('user_id', '=', session('User'))->first();
         $test = $user->TransactionHistories()->orderBy('id', 'desc')->paginate(5);
+        // Get current all transction total
+        $all_transaction_total = $user->TransactionHistories->where('status', 'success')->sum('amount');
+
+
+
+        // Get all transaction for this month
+        $month = date('m');
+        $year = date('Y');
+
+        $all_transaction_this_month = TransactionHistory::where('user_id', '=', session('User'))->where('status', 'success')->whereMonth('created_at', $month)->whereYear('created_at', $year)->sum('amount');
 
 
         if (!$user->pin) {
@@ -53,7 +81,9 @@ class UserAccountController extends Controller
             [
                 'user' => $user,
                 'userAccount' => $useraccount,
-                'TransactionHistories' => $test
+                'TransactionHistories' => $test,
+                'all_transaction_total' => $all_transaction_total,
+                'all_transaction_this_month' => $all_transaction_this_month
             ]
         );
     }
@@ -90,7 +120,7 @@ class UserAccountController extends Controller
                     'status' => "failed"
                 ]
             );
-            return back()->with('failed', "#$amount_to_deposite is too small minimum deposit is #    100");
+            return back()->with('failed', "#$amount_to_deposite is an invalid amount minimum deposit is #100 and Maximunm is #50,000");
         }
 
         $amount = UserAccount::where('user_id', $user->id)->update([
