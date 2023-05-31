@@ -8,9 +8,12 @@
 
         <div class="bg-white md:w-4/5  mt-10 h-fit md:h-full">
             <div class=" md:grid grid-cols-2 ">
-                <div id="illustratiion" class="col-span-1 bg-gray-100 pt-40 pb-10 hidden md:block">
+                <div id="illustratiion" class="col-span-1 bg-gray-100 pt-10 pb-10 hidden md:block">
                     <div>
-                        <h1 class="md:text-2xl text-xl">
+                        <div class="flex justify-center">
+                            <img src="{{ asset('logo.png') }}" alt="" class="h-[50%] w-[50%]">
+                        </div>
+                        <h1 class="md:text-2xl text-xl mt-10">
                             <span class="text-green-400 ">SharpReload</span> your Data & other
 
                             <span class="block md:none">very Fast</span>
@@ -79,8 +82,7 @@
             </div>
         </div>
 
-
-
+   
 
     </div>
 </div>

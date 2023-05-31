@@ -11,7 +11,7 @@
             <h1 class="text-center font-bold my-4 text-xl text-green-500">DEPOSIT</h1>
 
             <div class="text-center mt-2 ">
-                <div class="grid grid-cols-3 justify-between px-10 pb-10 space-x-1">
+                <div class="grid grid-cols-3 justify-between px-10 pb-10 space-x-1 md:space-x-20">
                     <div class="col-span-1 shadow-lg rounded-md text-sm md:text-md bg-white p-2 flex-shrink-0">
                         <span class="block text-gray-600">
                             Balance
@@ -214,12 +214,14 @@
                             <p>{{ $transactionHistory->payment_method }} </p>
                             <div class="mt-2 md:hidden">
                                 <p>{{ $transactionHistory->transaction_type }} </p>
-                                <p><span class="font-semibold">Date:</span> {{ $transactionHistory->created_at->format('M, d, Y H:i:s') }}</p>
+                                <p><span class="font-semibold">Date:</span>
+                                    {{ $transactionHistory->created_at->format('M, d, Y H:i:s') }}</p>
                             </div>
                         </div>
                         <div class="hidden md:block">
                             <p>{{ $transactionHistory->transaction_type }} </p>
-                            <p><span class="font-semibold">Date:</span> {{ $transactionHistory->created_at->format('M, d, Y H:i:s') }}</p>
+                            <p><span class="font-semibold">Date:</span>
+                                {{ $transactionHistory->created_at->format('M, d, Y H:i:s') }}</p>
                         </div>
 
                         <p

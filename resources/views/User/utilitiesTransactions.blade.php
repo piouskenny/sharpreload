@@ -26,23 +26,22 @@
                             <p>{{ $utilities_transaction->plan }} </p>
                             <div class="mt-2 md:hidden">
                                 <p>{{ $utilities_transaction->transaction_type }} </p>
-                                <p><span class="font-semibold">Date:</span> {{ $utilities_transaction->created_at->format('M, d, Y H:i:s') }}</p>
+                                <p><span class="font-semibold">Date:</span>
+                                    {{ $utilities_transaction->created_at->format('M, d, Y H:i:s') }}</p>
                                 <p>Phone Number{{ $utilities_transaction->phone_number }} </p>
 
                             </div>
                         </div>
                         <div class="hidden md:block">
                             <p>{{ $utilities_transaction->transaction_type }} </p>
-                            <p><span class="font-semibold">Date:</span> {{ $utilities_transaction->created_at->format('M, d, Y H:i:s') }}</p>
-                            <p><span class="font-semibold">Phone Number:</span> 0{{ $utilities_transaction->phone_number }} </p>
-
+                            <p><span class="font-semibold">Date:</span>
+                                {{ $utilities_transaction->created_at->format('M, d, Y H:i:s') }}</p>
+                            <p><span class="font-semibold">Phone Number:</span> 0{{ $utilities_transaction->phone_number }}
+                            </p>
                         </div>
-
                         <p
                             class="{{ $utilities_transaction->status == 'successful' ? 'text-green-400' : 'text-red-400' }} uppercase">
                             {{ $utilities_transaction->status }}</p>
-
-
                     </div>
                 @empty
                     <p class="text-red-500 text-center mt-4">
