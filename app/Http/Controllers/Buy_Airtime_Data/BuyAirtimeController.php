@@ -7,5 +7,5 @@ use Illuminate\Http\Request;
 
 class BuyAirtimeController extends Controller
 {
-    //
+    // currently working on the airtime check BuyDataController
 }
