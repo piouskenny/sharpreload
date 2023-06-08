@@ -99,6 +99,8 @@ class UserController extends Controller
 
     public function profile()
     {
+
+        
         $user = User::where('id', '=', session('User'))->first();
 
         if (!$user->pin) {

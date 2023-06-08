@@ -21,7 +21,7 @@ class UserAuthMiddleware
         } elseif (session()->has('User')) {
             $user = User::where('id', '=', session('User'))->first();
         }
-
+        
         return $next($request);
     }
 }

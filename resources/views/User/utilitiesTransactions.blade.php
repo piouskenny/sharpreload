@@ -51,7 +51,6 @@
 
                 <div class="pb-[100px] md:pb-20 ">
                     {{ $utilities_transactions->links() }}
-
                 </div>
 
             </section>
