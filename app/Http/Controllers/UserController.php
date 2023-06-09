@@ -8,30 +8,24 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Redirect;
+use App\Services\UserControllerServices;
 
 class UserController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+
+    public $userControllerServices;
 
     public function account()
     {
         return view('User.account');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
+
     public function create()
     {
         return view('User.signup');
     }
 
-
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(UsersignupRequest $request)
     {
         $request->validated();
@@ -51,7 +45,7 @@ class UserController extends Controller
             'user_id' => $user->id,
             'account_balance' => 0,
         ]);
-        
+
 
 
         return redirect()->route('user.login')->with('success', 'Account created Successfully');
@@ -83,9 +77,6 @@ class UserController extends Controller
         }
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(User $user)
     {
         $user = User::where('id', '=', session('User'))->first();
@@ -100,7 +91,7 @@ class UserController extends Controller
     public function profile()
     {
 
-        
+
         $user = User::where('id', '=', session('User'))->first();
 
         if (!$user->pin) {
@@ -112,25 +103,9 @@ class UserController extends Controller
         return view('User.profile')->with('user', $user);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(User $user)
-    {
-        //
-    }
+ 
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, User $user)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
+ 
     public function logout()
     {
         if (session()->has('User')) {
