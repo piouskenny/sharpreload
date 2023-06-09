@@ -73,7 +73,7 @@
         <div class="h-screen w-screen" class="mb-4">
             <div class="flex justify-center w-screen">
                 <div class="w-full">
-                    <form action="{{ route('user.buy_mtn_data_request') }}" method="post">
+                    <form action="{{ route('user.buy_9mobile_data_request') }}" method="post">
                         @csrf
                         @method('post')
 
