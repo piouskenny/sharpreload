@@ -80,4 +80,8 @@ class BuyDataServices
 
         return $output;
     }
+
+    public function buy_airtel_data_request() {
+        
+    }
 }

@@ -15,7 +15,7 @@ use App\Services\BuyDataServices;
 class BuyDataController extends Controller
 {
 
-    public $BuyDataServices;
+    public $BuyDataServices new BuyDataServices;
 
     public function buy_mtn_data()
     {
@@ -26,7 +26,6 @@ class BuyDataController extends Controller
     public function buy_mtn_data_request(BuyDataRequest $request)
     {
         $user_id = session('User');
-        $this->BuyDataServices = new BuyDataServices;
         $output = $this->BuyDataServices->buy_mtn_data_request($request, $user_id);
         return $output;
     }
