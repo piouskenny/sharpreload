@@ -24,10 +24,10 @@ class BuyDataServices
             $user_balance = $user->userAccount->account_balance;
 
             if ($doubleValue > $user_balance) {
-                return back()->with('failed', "Balance too low");
+                $output =  back()->with('failed', "Balance too low");
             } elseif ($user->pin != $request->pin) {
 
-                return back()->with('failed', 'Incorrect Pin');
+                $output =  back()->with('failed', 'Incorrect Pin');
             } else {
 
                 // There will be a functionality code here from the vendor API that wil handle the transction
@@ -59,7 +59,7 @@ class BuyDataServices
                     $UtilitiesTransactions->save();
 
                     if ($update_user_account) {
-                        return back()->with('success', "Data Purchased successfully $request->data_plans for $request->phone_number");
+                        $output =  back()->with('success', "Data Purchased successfully $request->data_plans for $request->phone_number");
                     }
                 } else {
 
@@ -71,11 +71,13 @@ class BuyDataServices
                     $UtilitiesTransactions->coupon = $request->coupon;
                     $UtilitiesTransactions->status = $status;
                     $UtilitiesTransactions->save();
-                    return back()->with('failed', "Data Purchased failed");
+                    $output =  back()->with('failed', "Data Purchased failed");
                 }
             }
         } else {
-            return back()->with('failed', "Not a Mtn Number");
+            $output = back()->with('failed', "Not a Mtn Number");
         }
+
+        return $output;
     }
 }

@@ -20,16 +20,15 @@ class BuyDataController extends Controller
     public function buy_mtn_data()
     {
         $user = User::where('id', '=', session('User'))->first();
-
         return view('User.data_form.mtn_data')->with('user', $user);
     }
-
 
     public function buy_mtn_data_request(BuyDataRequest $request)
     {
         $user_id = session('User');
         $this->BuyDataServices = new BuyDataServices;
-        $this->BuyDataServices->buy_mtn_data_request($request, $user_id);
+        $output = $this->BuyDataServices->buy_mtn_data_request($request, $user_id);
+        return $output;
     }
 
     public function buy_airtel_data()
@@ -52,8 +51,6 @@ class BuyDataController extends Controller
             return back()->with('failed', 'Not an Airtel Number');
         }
     }
-
-
 
 
     public function buy_glo_data()
