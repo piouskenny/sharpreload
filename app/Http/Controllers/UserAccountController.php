@@ -48,36 +48,18 @@ class UserAccountController extends Controller
         );
     }
 
-
     public function deposit()
     {
-        $user = User::where('id', '=', session('User'))->first();
-        $useraccount = UserAccount::where('user_id', '=', session('User'))->first();
-        $test = $user->TransactionHistories()->orderBy('id', 'desc')->paginate(5);
-        // Get current all transction total
-        $all_transaction_total = $user->TransactionHistories->where('status', 'success')->sum('amount');
-
-
-
-        // Get all transaction for this month
-        $month = date('m');
-        $year = date('Y');
-
-        $all_transaction_this_month = TransactionHistory::where('user_id', '=', session('User'))->where('status', 'success')->whereMonth('created_at', $month)->whereYear('created_at', $year)->sum('amount');
-
-
-        if (!$user->pin) {
-            return view('User.pin_page')->with('user', $user);
-        }
-
+        $this->UserAccountControllerServices = new UserAccountControllerServices;
+        $output = $this->UserAccountControllerServices->deposit();
         return view(
             'user.deposit',
             [
-                'user' => $user,
-                'userAccount' => $useraccount,
-                'TransactionHistories' => $test,
-                'all_transaction_total' => $all_transaction_total,
-                'all_transaction_this_month' => $all_transaction_this_month
+                'user' => $output[0],
+                'userAccount' => $output[1],
+                'TransactionHistories' => $output[2],
+                'all_transaction_total' => $output[3],
+                'all_transaction_this_month' => $output[4]
             ]
         );
     }
