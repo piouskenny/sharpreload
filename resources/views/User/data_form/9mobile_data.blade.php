@@ -53,7 +53,7 @@
                             </p>
                         </div>
                         <div class="items-center px-4 py-3">
-                            <a href="{{ route('user.buy_mtn_data') }}">
+                            <a href="{{ route('user.buy_9mobile_data') }}">
                                 <button id="ok-btn"
                                     class="px-4 py-2 bg-red-500 text-white text-base font-medium rounded-md w-full shadow-sm hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-300">
                                     OK
@@ -67,9 +67,7 @@
         @endif
 
 
-
-
-        <h1 class="text-center font-bold my-4 text-xl text-green-500">BUY MTN DATA</h1>
+        <h1 class="text-center font-bold my-4 text-xl text-green-500">BUY 9mobile DATA</h1>
         <div class="h-screen w-screen" class="mb-4">
             <div class="flex justify-center w-screen">
                 <div class="w-full">
@@ -92,12 +90,12 @@
                             <select name="data_plans" id="data_plans"
                                 class="border-2 px-2 md:h-12 mt-4 rounded-lg md:w-[300px] w-[80%] h-[8vh] input_focus text-gray-800">
                                 <option value="">Select Plan</option>
-                                <option value="mtn 500MB #125">MTN SME 500MB #125</option>
-                                <option value="mtn 1GB #240">MTN SME 1GB #240</option>
-                                <option value="mtn 2GB #480">MTN SME 2GB #480</option>
-                                <option value="mtn 3GB #720">MTN SME 3GB #720</option>
-                                <option value="mtn 5GB #1200">MTN SME 5GB #1200</option>
-                                <option value="mtn 6GB #2400">MTN SME 10GB #2400</option>
+                                <option value="9mobile 500MB #125">9mobile SME 500MB #125</option>
+                                <option value="9mobile 1GB #240">9mobile SME 1GB #240</option>
+                                <option value="9mobile 2GB #480">9mobile SME 2GB #480</option>
+                                <option value="9mobile 3GB #720">9mobile SME 3GB #720</option>
+                                <option value="9mobile 5GB #1200">9mobile SME 5GB #1200</option>
+                                <option value="9mobile 6GB #2400">9mobile SME 10GB #2400</option>
                             </select>
                         </div>
                         <span class="block text-red-500 text-center">
