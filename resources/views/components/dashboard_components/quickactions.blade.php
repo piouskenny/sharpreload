@@ -39,7 +39,6 @@
             </div>
         </a>
 
-
         <div class="text-center bg-white shadow py-3 px-4 rounded-md">
             <div class="rounded-[100%] flex justify-center  ">
 
