@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Models\TransactionHistory;
 use App\Models\User;
 use App\Models\UserAccount;
+use App\Models\UserAdditionalInfo;
 
 class UserAccountControllerServices
 {
@@ -118,6 +119,24 @@ class UserAccountControllerServices
 
             $output = back()->with('message_error', "The deposit of $amount_to_deposite to your account failed");
         }
+
+        return $output;
+    }
+
+
+    public function add_bank_account($request)
+    {
+
+        $user = User::where('id', '=', session('User'))->first();
+
+        $output = UserAdditionalInfo::create(
+            [
+                'user_id' => $user->id,
+                'bank_name' => $request->bank_name,
+                'account_number' => $request->account_number,
+                'account_name' => $request->account_name,
+            ]
+        );
 
         return $output;
     }

@@ -77,7 +77,6 @@ class UserAccountController extends Controller
         return $output;
     }
 
-
     public function buy_data()
     {
         $user = User::where('id', '=', session('User'))->first();
@@ -93,27 +92,17 @@ class UserAccountController extends Controller
     }
     public function Withdraw()
     {
+        // Function to withdraw money into users account
     }
 
 
     public function add_bank_account(UserBankDetialsRequest $request)
     {
-
         $request->validated();
+        $this->UserAccountControllerServices = new UserAccountControllerServices;
+        $output = $this->UserAccountControllerServices->add_bank_account($request);
 
-        $user = User::where('id', '=', session('User'))->first();
-
-        $add_account_detials = UserAdditionalInfo::create(
-            [
-                'user_id' => $user->id,
-                'bank_name' => $request->bank_name,
-                'account_number' => $request->account_number,
-                'account_name' => $request->account_name,
-            ]
-        );
-
-
-        if ($add_account_detials) {
+        if ($output) {
             return back()->with('success', 'Bank Account details created Successfully');
         } else {
             return true;
