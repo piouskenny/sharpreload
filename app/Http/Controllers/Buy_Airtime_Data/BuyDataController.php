@@ -38,25 +38,17 @@ class BuyDataController extends Controller
         return view('User.data_form.airtel_data')->with('user', $user);
     }
 
-    public function buy_airtel_data_request(Request $request)
+    public function buy_airtel_data_request(BuyDataRequest $request)
     {
-
-        $phone_number = $request->phone_number;
-
-        $isAirtelNumber = preg_match('/^(0701|0708|0802|0808|0812|0901|0902|0904|0907)\d{7}$/', $phone_number);
-
-        if ($isAirtelNumber) {
-            return true;
-        } else {
-            return back()->with('failed', 'Not an Airtel Number');
-        }
+        $user_id = session('User');
+        $this->BuyDataServices = new BuyDataServices;
+        $output =  $this->BuyDataServices->buy_airtel_data_request($request, $user_id);
+        return $output;
     }
-
 
     public function buy_glo_data()
     {
         $user = User::where('id', '=', session('User'))->first();
-
         return view('User.data_form.glo_data')->with('user', $user);
     }
 
