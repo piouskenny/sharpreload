@@ -42,8 +42,4 @@ class UserControllerServices
 
         return $output;
     }
-
-    // public function show_service()
-    // {
-    // }
 }

@@ -8,11 +8,13 @@ use App\Models\User;
 use App\Models\UserAccount;
 use App\Models\TransactionHistory;
 use App\Models\UserAdditionalInfo;
-
+use App\Services\UserAccountControllerServices;
 
 
 class UserAccountController extends Controller
 {
+
+    public $UserAccountControllerServices;
 
 
     public function pin_page()
@@ -24,17 +26,9 @@ class UserAccountController extends Controller
 
     public function create_user_pin(Request $request)
     {
-        $user = User::where('id', '=', session('User'))->first();
 
-        $request->validate([
-            'pin' => 'required|min:4|max:4',
-            'confirm_pin' => 'required|same:pin',
-        ]);
-
-
-        $user = User::where('id', $user->id)->update([
-            'pin' => $request->confirm_pin
-        ]);
+        $this->UserAccountControllerServices = new UserAccountControllerServices;
+        $this->UserAccountControllerServices->create_user_pin($request);
 
         return redirect()->route('user.pin_page')->with('success', 'Transaction Pin created Successfully');
     }
@@ -43,15 +37,13 @@ class UserAccountController extends Controller
 
     public function UtilitiesTransactions()
     {
-        $user = User::where('id', '=', session('User'))->first();
-
-        $utilities_transactions =  $user->UtilitiesTransactions()->orderBy('id', 'desc')->paginate(5);
-
+        $this->UserAccountControllerServices = new UserAccountControllerServices;
+        $output = $this->UserAccountControllerServices->UtilitiesTransactions();
         return view(
             'User.utilitiesTransactions',
             [
-                'user' => $user,
-                'utilities_transactions' => $utilities_transactions
+                'user' => $output[0],
+                'utilities_transactions' => $output[1]
             ]
         );
     }
