@@ -7,7 +7,7 @@
 
             <div class="flex justify-center w-screen">
                 <div class="w-full ">
-                    <form action="" method="post">
+                    <form action="{{ route('user.buy_airtel_data_request') }}" method="post">
                         @csrf
                         @method('post')
 
