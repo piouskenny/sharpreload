@@ -94,7 +94,7 @@ class UserAccountController extends Controller
     {
         // Function to withdraw money into users account
     }
-    
+
     public function add_bank_account(UserBankDetialsRequest $request)
     {
         $request->validated();
